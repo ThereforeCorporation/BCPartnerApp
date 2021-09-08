@@ -1,5 +1,10 @@
 pageextension 50000 "Partner-Contact-Card" extends "Contact Card" // Page 5050
 {
+    //see example below on how to add the drop zone onto another card/page
+    //To Do: 
+    //        *) Add the factbox to the page (reference "The-Drag-Drop-Documents-ListPa")
+    //        *) Set the SubPage Link correctly 
+    //        *) Create a mapping so bShow is true
     layout
     {
         addfirst(factboxes)

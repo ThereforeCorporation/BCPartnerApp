@@ -1,5 +1,6 @@
 codeunit 50000 "Partner-Event-Handler"
 {
+    //see code below to add a custom macro to be used in mappings (example macro [SPECIALNAME])
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"The-Therefore-Functions", 'OnAfterGetMacroValue', '', true, true)]
     local procedure
     OnAfterGetMacroValue(parMakro: Text[250]; recCategoryInput: Record "The-Category-Input"; refRec: RecordRef; var strReturn: Text[250])
@@ -34,6 +35,14 @@ codeunit 50000 "Partner-Event-Handler"
         //    bShow := true;
     end;
 
+    //example code to overwrite the default content of the drop zone linked documents list
+    //this can be used to add additional documents to the list which have not been assigned on this page
+    //in the example below all documents saved to a contact of a customer are also loaded/displayed when the only customer page is opened and vice-versa
+    //To Do:
+    //       *) Decide if you want to customize for this table - if not just return with isHandled:= false
+    //       *) Clear the current filter
+    //       *) Collect the required data and build a filter for rows/documents/data to be added and call AddFilter2TempTable
+    //       *) Do this for as many rows/documents/data you want to display on that specific table
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"The-Therefore-Functions", 'OnBeforeUpdateSourceTable', '', true, true)]
     local procedure C52101146_ThereforeFunctions_OnBeforeUpdateSourceTable(var Rec: Record "The-Therefore-Documents" temporary; var RecFilter: Record "The-Therefore-Documents" temporary; isHandled: Boolean);
     var
