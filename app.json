@@ -10,7 +10,7 @@
   "help": "https://www.therefore.net/help/",
   "url": "http://www.therefore.net",
   "logo": "",
-  "application": "18.0.0.0",
+  "application": "15.0.0.0",
   "dependencies": [
    	{
 		"id": "8267d27f-52ed-42e7-ac81-32b1f4ca35e3",
@@ -20,7 +20,7 @@
 	  }
   ],
   "screenshots": [],
-  "platform": "18.0.0.0",
+  "platform": "15.0.0.0",
   "idRanges": [
     {
       "from": 50000,
