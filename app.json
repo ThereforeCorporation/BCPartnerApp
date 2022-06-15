@@ -28,6 +28,6 @@
     }
   ],
   "contextSensitiveHelpUrl": "https://www.therefore.net/help/",
-  "showMyCode": true,
+  "resourceExposurePolicy": {"allowDebugging": true, "allowDownloadingSource": true, "includeSourceInSymbolFile": true},
   "runtime": "9.0"
 }
