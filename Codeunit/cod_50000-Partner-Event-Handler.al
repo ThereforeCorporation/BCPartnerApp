@@ -55,6 +55,9 @@ codeunit 50000 "Partner-Event-Handler"
     begin
         IF (NOT EVALUATE(iTableID, RecFilter.GETFILTER("Table ID"))) THEN;
 
+        IF DELCHR(RecFilter.GETFILTER("Document No."), '=', '''') = '' THEN
+            EXIT;
+
         // Build Tmp Table
         CASE iTableID OF
             5050:
