@@ -2,8 +2,7 @@ codeunit 50000 "Partner-Event-Handler"
 {
     //see code below to add a custom macro to be used in mappings (example macro [SPECIALNAME])
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"The-Therefore-Functions", 'OnAfterGetMacroValue', '', true, true)]
-    local procedure
-    OnAfterGetMacroValue(parMakro: Text[250]; recCategoryInput: Record "The-Category-Input"; refRec: RecordRef; var strReturn: Text[250])
+    local procedure TheThereforeFunctions_OnAfterGetMacroValue(parMakro: Text[250]; recCategoryInput: Record "The-Category-Input"; refRec: RecordRef; var strReturn: Text[250])
     var
         refField: FieldRef;
     begin
@@ -28,10 +27,9 @@ codeunit 50000 "Partner-Event-Handler"
     end;
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"The-Therefore-Functions", 'OnAfterShowDocumentTypeInMapping', '', true, true)]
-    local procedure
-    OnAfterShowDocumentTypeInMapping(iTableID: Integer; var bShow: Boolean)
+    local procedure TheThereforeFunctions_OnAfterShowDocumentTypeInMapping(iTableID: Integer; var bShow: Boolean)
     begin
-        //if ((iTableID = 36) or (iTableID = 38)) then
+        //if((iTableID = 36) or (iTableID = 38)) then
         //    bShow := true;
     end;
 
@@ -44,7 +42,7 @@ codeunit 50000 "Partner-Event-Handler"
     //       *) Collect the required data and build a filter for rows/documents/data to be added and call AddFilter2TempTable
     //       *) Do this for as many rows/documents/data you want to display on that specific table
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"The-Therefore-Functions", 'OnBeforeUpdateSourceTable', '', true, true)]
-    local procedure C52101146_ThereforeFunctions_OnBeforeUpdateSourceTable(var Rec: Record "The-Therefore-Documents" temporary; var RecFilter: Record "The-Therefore-Documents" temporary; isHandled: Boolean);
+    local procedure TheThereforeFunctions_OnBeforeUpdateSourceTable(var Rec: Record "The-Therefore-Documents" temporary; var RecFilter: Record "The-Therefore-Documents" temporary; isHandled: Boolean);
     var
         recThereforeDocuments: Record "The-Therefore-Documents";
         recContactBusinessRelation: Record "Contact Business Relation";
@@ -53,66 +51,113 @@ codeunit 50000 "Partner-Event-Handler"
         cCompanyNo: Code[20];
         iTableID: Integer;
     begin
-        IF (NOT EVALUATE(iTableID, RecFilter.GETFILTER("Table ID"))) THEN;
+        if (not Evaluate(iTableID, RecFilter.GetFilter("Table ID"))) then;
 
-        IF DELCHR(RecFilter.GETFILTER("Document No."), '=', '''') = '' THEN
-            EXIT;
+        if (DELCHR(RecFilter.GetFilter("Document No."), '=', '''') = '') then
+            exit;
 
         // Build Tmp Table
-        CASE iTableID OF
+        case iTableID of
             5050:
-                BEGIN
-                    recContact.GET(RecFilter.GETFILTER("Document No."));
+                begin
+                    recContact.Get(RecFilter.GetFilter("Document No."));
                     cCompanyNo := recContact."Company No.";
 
                     // Get Customer
-                    recContactBusinessRelation.RESET();
-                    recContactBusinessRelation.SETRANGE("Contact No.", cCompanyNo);
-                    recContactBusinessRelation.SETRANGE("Link to Table", recContactBusinessRelation."Link to Table"::Customer);
-                    IF (recContactBusinessRelation.FINDFIRST()) THEN BEGIN
-                        recThereforeDocuments.RESET();
-                        recThereforeDocuments.SETRANGE("Document No.", recContactBusinessRelation."No.");
+                    recContactBusinessRelation.Reset();
+                    recContactBusinessRelation.SetRange("Contact No.", cCompanyNo);
+                    recContactBusinessRelation.SetRange("Link to Table", recContactBusinessRelation."Link to Table"::Customer);
+                    if (recContactBusinessRelation.FindFirst()) then begin
+                        recThereforeDocuments.Reset();
+                        recThereforeDocuments.SetRange("Document No.", recContactBusinessRelation."No.");
                         cuThereforeFunctions.AddFilter2TempTable(recThereforeDocuments, Rec);
-                    END;
+                    end;
 
                     // Get Contacts from Customer
-                    recContact.RESET();
-                    recContact.SETRANGE("Company No.", cCompanyNo);
-                    IF (recContact.FINDSET()) THEN BEGIN
-                        REPEAT
-                            recThereforeDocuments.RESET();
-                            recThereforeDocuments.SETRANGE("Document No.", recContact."No.");
+                    recContact.Reset();
+                    recContact.SetRange("Company No.", cCompanyNo);
+                    if (recContact.FindSet()) then begin
+                        repeat
+                            recThereforeDocuments.Reset();
+                            recThereforeDocuments.SetRange("Document No.", recContact."No.");
                             cuThereforeFunctions.AddFilter2TempTable(recThereforeDocuments, Rec);
-                        UNTIL recContact.NEXT() = 0;
-                    END;
+                        until recContact.Next() = 0;
+                    end;
 
-                    isHandled := TRUE;
-                END;
+                    isHandled := true;
+                end;
             18:
-                BEGIN
+                begin
                     // Get Customer
-                    recThereforeDocuments.RESET();
-                    recThereforeDocuments.SETRANGE("Document No.", RecFilter.GETFILTER("Document No."));
+                    recThereforeDocuments.Reset();
+                    recThereforeDocuments.SetRange("Document No.", RecFilter.GetFilter("Document No."));
                     cuThereforeFunctions.AddFilter2TempTable(recThereforeDocuments, Rec);
 
                     // Get Contacts from Customer
-                    recContactBusinessRelation.RESET();
-                    recContactBusinessRelation.SETRANGE("No.", RecFilter.GETFILTER("Document No."));
-                    recContactBusinessRelation.SETRANGE("Link to Table", recContactBusinessRelation."Link to Table"::Customer);
-                    IF (recContactBusinessRelation.FINDFIRST()) THEN BEGIN
-                        recContact.RESET();
-                        recContact.SETRANGE("Company No.", recContactBusinessRelation."Contact No.");
-                        IF (recContact.FINDSET()) THEN BEGIN
-                            REPEAT
-                                recThereforeDocuments.RESET();
-                                recThereforeDocuments.SETRANGE("Document No.", recContact."No.");
+                    recContactBusinessRelation.Reset();
+                    recContactBusinessRelation.SetRange("No.", RecFilter.GetFilter("Document No."));
+                    recContactBusinessRelation.SetRange("Link to Table", recContactBusinessRelation."Link to Table"::Customer);
+                    if (recContactBusinessRelation.FindFirst()) then begin
+                        recContact.Reset();
+                        recContact.SetRange("Company No.", recContactBusinessRelation."Contact No.");
+                        if (recContact.FindSet()) then begin
+                            repeat
+                                recThereforeDocuments.Reset();
+                                recThereforeDocuments.SetRange("Document No.", recContact."No.");
                                 cuThereforeFunctions.AddFilter2TempTable(recThereforeDocuments, Rec);
-                            UNTIL recContact.NEXT() = 0;
-                        END;
-                    END;
+                            until recContact.Next() = 0;
+                        end;
+                    end;
 
-                    isHandled := TRUE;
-                END;
-        END
+                    isHandled := true;
+                end;
+        end;
+    end;
+
+    // Transfer Dokuments from Quote zu Order
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Sales-Quote to Order (Yes/No)", 'OnAfterSalesQuoteToOrderRun', '', true, true)]
+    local procedure OnAfterSalesQuoteToOrderRun(var SalesHeader2: Record "Sales Header"; var SalesHeader: Record "Sales Header")
+    var
+        cuThePostFunctions: Codeunit "The-Post-Functions";
+    begin
+        TransferDocuments(
+            SalesHeader."No.", SalesHeader."Document Type".AsInteger(), SalesHeader2."No.", SalesHeader2."Document Type".AsInteger(), cuThePostFunctions.GetTableID(SalesHeader2.TableName())
+        );
+    end;
+
+    procedure TransferDocuments(cSourceDocumentNo: Code[20]; iSourceDocumentType: Integer; cDestDocumentNo: Code[20]; iDestDocumentType: Integer; iDestTableID: Integer)
+    var
+        recSourceTFDocuments: Record "The-Therefore-Documents";
+        recDestTFDocuments: Record "The-Therefore-Documents";
+        recMapping: Record "The-Mapping-Header";
+    begin
+        // Mapping vorhanden
+        recMapping.Reset();
+        //recMapping.SetRange( Active, TRUE );
+        recMapping.SetRange("NAV Table", iDestTableID);
+        recMapping.SetRange("Document Type", 0);
+        if (recMapping.IsEmpty()) then
+            exit;
+
+        recSourceTFDocuments.Reset();
+        recSourceTFDocuments.SetRange("Document No.", cSourceDocumentNo);
+        recSourceTFDocuments.SetRange("Document Type", iSourceDocumentType);
+        if (recSourceTFDocuments.FindSet()) then begin
+            repeat
+                recDestTFDocuments.Reset();
+                recDestTFDocuments.SetRange("Document No.", cDestDocumentNo);
+                recDestTFDocuments.SetRange("Table ID", iDestTableID);
+                recDestTFDocuments.SetRange("Therefore Document No.", recSourceTFDocuments."Therefore Document No.");
+                if (not recDestTFDocuments.FindFirst()) then begin
+                    recDestTFDocuments.Init();
+                    recDestTFDocuments.TransferFields(recSourceTFDocuments);
+                    recDestTFDocuments."Link ID" := 0;
+                    recDestTFDocuments."Document No." := cDestDocumentNo;
+                    recDestTFDocuments."Document Type" := iDestDocumentType;
+                    recDestTFDocuments."Table ID" := iDestTableID;
+                    recDestTFDocuments.Insert(true);
+                end;
+            until recSourceTFDocuments.Next() = 0;
+        end;
     end;
 }

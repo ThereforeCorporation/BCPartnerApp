@@ -1,33 +1,34 @@
 {
   "id": "5a9573cc-2e53-43af-9734-4cf46d714e64",
-  "name": "Therefore Connector - Partner App Sample",
+  "name": "Therefore Connector - Partner App",
   "publisher": "Therefore Corporation GmbH",
-  "version": "1.0.0.0",
-  "brief": "Therefore™ Connector for Dynamics 365 Business Central Partner App Sample",
+  "version": "1.0.0.1",
+  "brief": "Therefore™ Connector for Dynamics 365 Business Central Partner App",
   "description": "This app extends the Dynamics 365 Business Central to Therefore™ Connector with customer specific code",
   "privacyStatement": "https://www.therefore.net/privacypolicy/",
   "EULA": "https://www.therefore.net/legal/emea_eula/",
   "help": "https://www.therefore.net/help/",
   "url": "http://www.therefore.net",
-  "logo": "",
-  "application": "15.0.0.0",
-  "dependencies": [
-   	{
-		"id": "8267d27f-52ed-42e7-ac81-32b1f4ca35e3",
-		"publisher": "Therefore Corporation GmbH",
-		"name": "Therefore Connector",
-		"version": "15.0.0.0"
-	  }
-  ],
+  "logo": "./logo/APP_neutral.png",
+  "application": "20.0.0.0",
   "screenshots": [],
-  "platform": "15.0.0.0",
+  "platform": "20.0.0.0",  
   "idRanges": [
     {
       "from": 50000,
       "to": 99999
     }
   ],
+  "dependencies": [
+   	{
+		"id": "8267d27f-52ed-42e7-ac81-32b1f4ca35e3",
+		"publisher": "Therefore Corporation GmbH",
+		"name": "Therefore Connector",
+		"version": "15.0.0.1"
+	  }
+  ],
   "contextSensitiveHelpUrl": "https://www.therefore.net/help/",
-  "resourceExposurePolicy": {"allowDebugging": true, "allowDownloadingSource": true, "includeSourceInSymbolFile": true},
-  "runtime": "9.0"
+  "resourceExposurePolicy": {"allowDebugging": false, "allowDownloadingSource": false, "includeSourceInSymbolFile": false},
+  "runtime": "9.0",
+  "features": [ "TranslationFile", "GenerateCaptions" ]
 }
