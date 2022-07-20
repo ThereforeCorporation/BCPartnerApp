@@ -120,44 +120,8 @@ codeunit 50000 "Partner-Event-Handler"
     var
         cuThePostFunctions: Codeunit "The-Post-Functions";
     begin
-        TransferDocuments(
+        cuThePostFunctions.TransferDocuments(
             SalesHeader."No.", SalesHeader."Document Type".AsInteger(), SalesHeader2."No.", SalesHeader2."Document Type".AsInteger(), cuThePostFunctions.GetTableID(SalesHeader2.TableName())
         );
-    end;
-
-    procedure TransferDocuments(cSourceDocumentNo: Code[20]; iSourceDocumentType: Integer; cDestDocumentNo: Code[20]; iDestDocumentType: Integer; iDestTableID: Integer)
-    var
-        recSourceTFDocuments: Record "The-Therefore-Documents";
-        recDestTFDocuments: Record "The-Therefore-Documents";
-        recMapping: Record "The-Mapping-Header";
-    begin
-        // Mapping vorhanden
-        recMapping.Reset();
-        //recMapping.SetRange( Active, TRUE );
-        recMapping.SetRange("NAV Table", iDestTableID);
-        recMapping.SetRange("Document Type", 0);
-        if (recMapping.IsEmpty()) then
-            exit;
-
-        recSourceTFDocuments.Reset();
-        recSourceTFDocuments.SetRange("Document No.", cSourceDocumentNo);
-        recSourceTFDocuments.SetRange("Document Type", iSourceDocumentType);
-        if (recSourceTFDocuments.FindSet()) then begin
-            repeat
-                recDestTFDocuments.Reset();
-                recDestTFDocuments.SetRange("Document No.", cDestDocumentNo);
-                recDestTFDocuments.SetRange("Table ID", iDestTableID);
-                recDestTFDocuments.SetRange("Therefore Document No.", recSourceTFDocuments."Therefore Document No.");
-                if (not recDestTFDocuments.FindFirst()) then begin
-                    recDestTFDocuments.Init();
-                    recDestTFDocuments.TransferFields(recSourceTFDocuments);
-                    recDestTFDocuments."Link ID" := 0;
-                    recDestTFDocuments."Document No." := cDestDocumentNo;
-                    recDestTFDocuments."Document Type" := iDestDocumentType;
-                    recDestTFDocuments."Table ID" := iDestTableID;
-                    recDestTFDocuments.Insert(true);
-                end;
-            until recSourceTFDocuments.Next() = 0;
-        end;
     end;
 }
