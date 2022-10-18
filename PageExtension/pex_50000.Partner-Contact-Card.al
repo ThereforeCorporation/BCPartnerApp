@@ -26,6 +26,6 @@ pageextension 50000 "Partner-Contact-Card" extends "Contact Card" // Page 5050
 
     trigger OnOpenPage()
     begin
-        bShow := (cuThereforeFunctions.GetMappingNo(cuThereforeFunctions.GetTableID(Rec.TableName), 0, false, true) > 0);
+        bShow := cuThereforeFunctions.DragDrop_MappingAvailable(cuThereforeFunctions.GetTableID(Rec.TableName), 0);
     end;
 }
