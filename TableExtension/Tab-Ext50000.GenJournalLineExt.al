@@ -35,9 +35,10 @@ tableextension 50000 GenJournalLine extends "Gen. Journal Line"
         //ThereforeDocuments.DeleteAll(false);
     end;
 
-    // Das Feld ThereforeKeyInt ist immer der höchste Wert der Tabelle
-    // Wenn Sie den höchsten Datensatz löschen, kann der Wert des Feldes erneut vergeben werden, es entstehen keine Lücken wie in einem "echten" AutoIncrement Feld
-    // Sie können auch den vergeben Wert durch eine Nummernserie bestimmen oder ihn in eine Setup Tabelle zwischenspeichern und jedesmal neu laden
+    // The ThereforeKeyInt will be calculated by the highest existing values in the table.
+    // If the entry with the highest gets deleted, the next new entry will get this same value again.
+    // So the ThereforeKeyInt is only truely unique, if nothing gets deleted.
+    // This should not cause any issue, unless references to Therefore documents, are not deleted as well.
     procedure SetIndivKey()
     var
         r: Record "Gen. Journal Line";

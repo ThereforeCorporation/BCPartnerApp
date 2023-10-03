@@ -125,15 +125,13 @@ codeunit 50000 "Partner-Event-Handler"
         );
     end;
 
-    /* ---
-    Das Finden des zugehörigen Datensatzes erfolgt im Standard durch den Primary Key, bei der Tabelle 81 geht dies nicht, das der Primary Key
-    aus 2 Code und einem Integer Feld besteht, somit haben wir ein eigenes Key Feld (ThereforeKeyInt = Unique)
-    Um den Datensatz mittels dieses Feldes und nicht des Primary Keys zu positionieren - damit die Index Daten geladen werden können - 
-    muss man diesen Event Subscriben.
-    Den Filter auf das Feld 50001 - ThereforeKeyInt setzen mit dem Wert aus dem Feld strPrimaryKey[3] 
-    An 1. und 2. Stelle würde ein Code Wert stehen, ist aber leer, da nicht positioniert werden kann. Somit 
-    steht an der 3. Stelle der Integer Wert. 
-    --- */
+    // Filtering for an entry is usually done by using the primary key.
+    // For some tables (e.g. 81) this is not possible, as the primary key is built-up by multiple fields.
+    // Only the combination of those multiple fields results in a unique value.
+    // To circumvent this problem, we created separate field "ThereforeKeyInt", which is a single integer field that uniquely identifies each row.
+    // Due to this new primary key, it's required to subscribe to event OnBeforeFilterPrimaryKeyForMappingValues and overwrite the existing filter.
+    // The filter needs to be changed, so that field "50001 ThereforeKeyInt" is set to strPrimaryKey[3].
+    // This will depend on the table and needs to be checked accordingly.
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"The-Therefore-Functions", 'OnBeforeFilterPrimaryKeyForMappingValues', '', true, true)]
     local procedure TheThereforeFunctions_OnBeforeFilterPrimaryKeyForMappingValues(iTableID: Integer; var refRec: RecordRef; strPrimaryKey: array[10] of Text[250]; var isHandled: Boolean)
     var
