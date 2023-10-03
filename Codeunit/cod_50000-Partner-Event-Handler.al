@@ -42,7 +42,7 @@ codeunit 50000 "Partner-Event-Handler"
     //       *) Collect the required data and build a filter for rows/documents/data to be added and call AddFilter2TempTable
     //       *) Do this for as many rows/documents/data you want to display on that specific table
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"The-Therefore-Functions", 'OnBeforeUpdateSourceTable', '', true, true)]
-    local procedure TheThereforeFunctions_OnBeforeUpdateSourceTable(var Rec: Record "The-Therefore-Documents" temporary; var RecFilter: Record "The-Therefore-Documents" temporary; isHandled: Boolean);
+    local procedure TheThereforeFunctions_OnBeforeUpdateSourceTable(var Rec: Record "The-Therefore-Documents" temporary; var RecFilter: Record "The-Therefore-Documents" temporary; var isHandled: Boolean);
     var
         recThereforeDocuments: Record "The-Therefore-Documents";
         recContactBusinessRelation: Record "Contact Business Relation";
@@ -123,5 +123,19 @@ codeunit 50000 "Partner-Event-Handler"
         cuThePostFunctions.TransferDocuments(
             SalesHeader."No.", SalesHeader."Document Type".AsInteger(), SalesHeader2."No.", SalesHeader2."Document Type".AsInteger(), cuThePostFunctions.GetTableID(SalesHeader2.TableName())
         );
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"The-Therefore-Functions", 'OnBeforeFilterPrimaryKeyForMappingValues', '', true, true)]
+    local procedure TheThereforeFunctions_OnBeforeFilterPrimaryKeyForMappingValues(iTableID: Integer; var refRec: RecordRef; strPrimaryKey: array[10] of Text[250]; var isHandled: Boolean)
+    var
+        refField: FieldRef;
+    begin
+        if (iTableID = 81) then begin
+            refField := refRec.Field(50001); // ThereforeKeyInt
+
+            refField.SetFilter(strPrimaryKey[3]); // Integer Field
+
+            isHandled := true;
+        end;
     end;
 }

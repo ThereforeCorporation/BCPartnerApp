@@ -3,10 +3,25 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="Therefore Connector - Partner App">
     <body>
       <group id="body">
+        <trans-unit id="PageExtension 4053917773 - Control 2279813723 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2583272393">
+          <source>Drag &amp; Drop Documents</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension General-JournalExt - Control The-Drag-Drop-Documents - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 1114126390 - Control 2279813723 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3542408424">
           <source>Drag &amp; Drop Documents</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Partner-Contact-Card - Control The-Drag-Drop-Documents - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 634226533 - Field 1467971857 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1806786327">
+          <source>ThereforeKey</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension GenJournalLine - Field ThereforeKey - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 634226533 - Field 495521624 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1806786327">
+          <source>ThereforeKey</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension GenJournalLine - Field ThereforeKeyInt - Property Caption</note>
         </trans-unit>
       </group>
     </body>
