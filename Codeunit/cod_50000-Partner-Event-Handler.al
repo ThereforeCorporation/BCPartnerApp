@@ -125,14 +125,25 @@ codeunit 50000 "Partner-Event-Handler"
         );
     end;
 
+    /* ---
+    Das Finden des zugehörigen Datensatzes erfolgt im Standard durch den Primary Key, bei der Tabelle 81 geht dies nicht, das der Primary Key
+    aus 2 Code und einem Integer Feld besteht, somit haben wir ein eigenes Key Feld (ThereforeKeyInt = Unique)
+    Um den Datensatz mittels dieses Feldes und nicht des Primary Keys zu positionieren - damit die Index Daten geladen werden können - 
+    muss man diesen Event Subscriben.
+    Den Filter auf das Feld 50001 - ThereforeKeyInt setzen mit dem Wert aus dem Feld strPrimaryKey[3] 
+    An 1. und 2. Stelle würde ein Code Wert stehen, ist aber leer, da nicht positioniert werden kann. Somit 
+    steht an der 3. Stelle der Integer Wert. 
+    --- */
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"The-Therefore-Functions", 'OnBeforeFilterPrimaryKeyForMappingValues', '', true, true)]
     local procedure TheThereforeFunctions_OnBeforeFilterPrimaryKeyForMappingValues(iTableID: Integer; var refRec: RecordRef; strPrimaryKey: array[10] of Text[250]; var isHandled: Boolean)
     var
         refField: FieldRef;
     begin
         if (iTableID = 81) then begin
-            refField := refRec.Field(50001); // ThereforeKeyInt
+            refField := refRec.Field(50001); // Field ID of ThereforeKeyInt (Integer Field)
 
+            // The Primary Key of Table 81 is: "Journal Template Name", "Journal Batch Name", "Line No."
+            // 1: Code[20], 2: Code[20], 3: Integer
             refField.SetFilter(strPrimaryKey[3]); // Integer Field
 
             isHandled := true;

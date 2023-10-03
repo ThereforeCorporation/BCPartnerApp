@@ -8,10 +8,9 @@ pageextension 50001 "General-JournalExt" extends "General Journal" // Page 39
             {
                 Caption = 'Drag & Drop Documents';
                 ApplicationArea = All;
-                //                SubPageLink = "Document No." = Field(ThereforeKey), "Table ID" = const(81);
                 SubPageLink =
                     "Entry No." = Field(ThereforeKeyInt),
-                    "Table ID" = const(81);
+                    "Table ID" = const(81); // Insert Table ID here
                 Visible = bShow;
             }
         }
