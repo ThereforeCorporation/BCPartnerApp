@@ -14,12 +14,12 @@ tableextension 50000 GenJournalLine extends "Gen. Journal Line"
         }
     }
 
-    trigger OnInsert()
-    begin
-        SetIndivKey();
-    end;
+    keys
+    {
+        key(TF_Key1; ThereforeKeyInt) { }
+    }
 
-    trigger OnModify()
+    trigger OnInsert()
     begin
         SetIndivKey();
     end;
@@ -41,13 +41,14 @@ tableextension 50000 GenJournalLine extends "Gen. Journal Line"
     // This should not cause any issue, unless references to Therefore documents, are not deleted as well.
     procedure SetIndivKey()
     var
-        r: Record "Gen. Journal Line";
+        GenJournalLine: Record "Gen. Journal Line";
     begin
         Rec.ThereforeKey := Rec."Journal Template Name" + Rec."Journal Batch Name" + FORMAT(Rec."Line No.");
 
-        r.Reset();
-        if (r.FindLast()) then
-            Rec.ThereforeKeyInt := r.ThereforeKeyInt + 1
+        GenJournalLine.Reset();
+        GenJournalLine.SetCurrentKey(ThereforeKeyInt);
+        if (GenJournalLine.FindLast()) then
+            Rec.ThereforeKeyInt := GenJournalLine.ThereforeKeyInt + 1
         else
             Rec.ThereforeKeyInt := 1;
     end;

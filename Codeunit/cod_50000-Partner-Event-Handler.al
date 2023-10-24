@@ -41,8 +41,8 @@ codeunit 50000 "Partner-Event-Handler"
     //       *) Clear the current filter
     //       *) Collect the required data and build a filter for rows/documents/data to be added and call AddFilter2TempTable
     //       *) Do this for as many rows/documents/data you want to display on that specific table
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"The-Therefore-Functions", 'OnBeforeUpdateSourceTable', '', true, true)]
-    local procedure TheThereforeFunctions_OnBeforeUpdateSourceTable(var Rec: Record "The-Therefore-Documents" temporary; var RecFilter: Record "The-Therefore-Documents" temporary; var isHandled: Boolean);
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"The-Therefore-Functions", 'OnBeforeUpdateSourceTableNew', '', true, true)]
+    local procedure TheThereforeFunctions_OnBeforeUpdateSourceTableNew(var Rec: Record "The-Therefore-Documents" temporary; var RecFilter: Record "The-Therefore-Documents" temporary; var isHandled: Boolean);
     var
         recThereforeDocuments: Record "The-Therefore-Documents";
         recContactBusinessRelation: Record "Contact Business Relation";
