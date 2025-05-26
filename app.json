@@ -10,9 +10,9 @@
   "help": "https://www.therefore.net/help/",
   "url": "http://www.therefore.net",
   "logo": "./logo/APP_neutral.png",
-  "application": "25.0.0.0",
+  "application": "26.0.0.0",
   "screenshots": [],
-  "platform": "25.0.0.0",  
+  "platform": "26.0.0.0",  
   "idRanges": [
     {
       "from": 50000,
@@ -29,6 +29,6 @@
   ],
   "contextSensitiveHelpUrl": "https://www.therefore.net/help/",
   "resourceExposurePolicy": {"allowDebugging": false, "allowDownloadingSource": false, "includeSourceInSymbolFile": false},
-  "runtime": "14.0",
+  "runtime":"15.0",
   "features": [ "TranslationFile", "GenerateCaptions" ]
 }
