@@ -4,7 +4,7 @@ This showcases on how to subscribe to events or add the Therefore Drop Zone to a
 
 # Additional resources
 Please also refer to the documentation of the Therefore Business Central Connector, 
-which is available here: https://therefore.net/help/2021/en-us/AR/conn_md365_bc.html
+which is available here: https://therefore.net/help/2025/en-us/AR/conn_md365_bc.html
 
 # How to contribute
 We would be happy if you want to contribute by adding additional samples or make our samples better.
