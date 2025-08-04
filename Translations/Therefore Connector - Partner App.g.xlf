@@ -3,10 +3,25 @@
   <file datatype="xml" source-language="en-US" target-language="en-US" original="Therefore Connector - Partner App">
     <body>
       <group id="body">
+        <trans-unit id="Report 2990601796 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Credit Memo Confirmation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Credit Memo Confirmation - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 4053917773 - Control 2279813723 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 2583272393">
           <source>Drag &amp; Drop Documents</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension General-JournalExt - Control The-Drag-Drop-Documents - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2573483683 - Action 4200172002 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1708100201">
+          <source>Print and Archive a sales credit memo confirmation.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Partner Sales Credit Memo - Action Print Confirmation - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="PageExtension 2573483683 - Action 4200172002 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 1708100201">
+          <source>Print and Archive Confirmation</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Partner Sales Credit Memo - Action Print Confirmation - Property Caption</note>
         </trans-unit>
         <trans-unit id="PageExtension 1114126390 - Control 2279813723 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3542408424">
           <source>Drag &amp; Drop Documents</source>
