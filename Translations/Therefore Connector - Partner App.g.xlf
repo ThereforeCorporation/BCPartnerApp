@@ -23,6 +23,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">PageExtension Partner Sales Credit Memo - Action Print Confirmation - Property Caption</note>
         </trans-unit>
+        <trans-unit id="PageExtension 3378404028 - Action 3859596476 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 815762449">
+          <source>Test Blob Archive</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PageExtension Partner The-Therefore-Setup - Action Test_BlobArchive - Property Caption</note>
+        </trans-unit>
         <trans-unit id="PageExtension 1114126390 - Control 2279813723 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Page 3542408424">
           <source>Drag &amp; Drop Documents</source>
           <note from="Developer" annotates="general" priority="2"></note>
